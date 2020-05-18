@@ -1,0 +1,32 @@
+{
+  "id": "/disk-filler-ephimeral-docker",
+  "container": {
+      "portMappings": [
+        { 
+          "containerPort": 8080,
+          "hostPort": 0, 
+          "labels": { 
+               "VIP_0": "/filler-docker:1234" 
+          }
+        }
+      ],
+      "type": "DOCKER",
+      "volumes": [],
+      "docker": { 
+         "image": "disk_filler" 
+      }
+  },
+  "args":[  
+     "python", "filler.py", "-a", "0.0.0.0", "-p", "8080", "-o", "/disk.dat"
+   ],
+  "instances": 1,
+  "cpus": 0.25,
+  "gpus": 0,
+  "mem": 32,
+  "disk": 0,
+  "networks": [
+    {
+        "mode": "container/bridge"
+    }
+  ]
+}
