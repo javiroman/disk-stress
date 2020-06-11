@@ -27,6 +27,21 @@ Fill disk: curl $CONTAINER_IP>:8080/fill?size=2
 Stop filling: curl $CONTAINER_IP:8080/stop
 ```
 
+# Checking limits in Docker environment
+```
+docker run  -d -p 8080:8080 --memory 1024m --cpuset-cpus=0 --name filler disk_filler 
+curl -s 172.17.0.2:8080/info?path=/tmp | jq .
+{
+  "cpu": 1,
+  "mem": 1,
+  "total_disk": 224.33196258544922,
+  "free_disk": 75.22528457641602,
+  "used_disk": 137.6447639465332
+}
+```
+
+
+
 # Copying manually the Docker image to Vagrant DC/OS nodes
 
 ```
